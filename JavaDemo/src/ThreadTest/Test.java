@@ -8,8 +8,15 @@ public class Test {
 	
 	public static void main(String[] args) {
 		Test test = new Test();
-		// new Thread(test::m1 ,"t1")？？？
 		Thread t1 = new Thread(test::m1 ,"t1");
+		// new Thread(test::m1 ,"t1")lambda表达式写法相当于以下代码
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				test.m1();
+			}
+		}).start();
 		t1.start();
 	}
 }
