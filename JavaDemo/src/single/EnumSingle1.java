@@ -21,6 +21,7 @@ public class EnumSingle1{
 		public EnumSingle1 getInstance() {
 			return enmSingle1;
 		}
+		
 	}
 	
 	public static EnumSingle1 getInstance() {
