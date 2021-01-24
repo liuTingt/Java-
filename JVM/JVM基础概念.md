@@ -64,9 +64,9 @@ JDK JRE JVM
 
 Class进入内存有三步：
 
-- 第一步Loading
+- 第一步Loading(加载)
 - 第二步Linking:第二步包含三小步，verification、preparation、resolution
-- 第三步Initializing
+- 第三步Initializing(初始化)
 
 Loading:
 
@@ -74,7 +74,7 @@ Loading:
 
 Linking的过程分为三小步：
 
-- Verification：校验装进来的class文件是不是符合class文件的标准，加入装进来的不是这个CA FE BA BE，在这个步骤就被拒掉了。
+- Verification：校验装进来的class文件是不是符合class文件的标准，假如装进来的不是这个CA FE BA BE，在这个步骤就被拒掉了。
 - Preparation：把class文件静态变量赋默认值，不是赋初始值，比如static i = 8，在这个步骤是先把把i赋值为0.
 - Resolution：是把class文件常量池里面用到的符号引用给转换为直接内存地址，直接可以访问到的内容。
 
@@ -153,7 +153,7 @@ com.ltt.jvm.classloader.T005_MSBClassLoader
 
 ​	Java是解释型和编译型混合语言。
 
-- 解释器
+- 解释型
   - bytecode intepreter
 - JIT
   - Just In-Time compile
@@ -168,16 +168,24 @@ com.ltt.jvm.classloader.T005_MSBClassLoader
 - -Xint 使用解释模式，启动很快，执行稍慢
 - -Xcomp 使用编译模式，执行很快，启动很慢
 
+### 懒加载LazyLoading
+
+- 严格将应该交LazyInitializing
+- JVM规范并没有规定何时加载
+- 但是严格规定了什么时候初始化
+  - new、getStatic（访问实例）、putStatic、invokestatic（访问静态方法），访问final变量除外。
+  - java.lang.reflect对类进行反射调用时
+  - 初始化子类的时候，父类首先初始化
+  - 虚拟机启动时，被执行的主类必须初始化
+  - 动态语言支持java.lang.invoke.MethodHandle解析的结果为REF_getstatic REF_putstatic  REF_invokestatic的方法句柄时，该类必须初始化。
+
+```
+com.ltt.jvm.classloader.T007_LayzeLoading
+```
+
 ## 面试
 
 ### 为什么使用双亲委派？
 
 最主要是安全，假如任何的类都可以自定义load到内存，那如果把java.lang.String类交给自定义classloader，load到内存，如果把这一部分打成jar包，给客户端使用，那么就能把客户端输入的String字符串，我都可以拿到，包括账号密码。其次可以节省资源，如果父加载器已经加载了就不用再次加载。
 
-内存加载过程
-
-运行时内存结构
-
-JVM常用指令
-
-GC与调优（重点）
