@@ -1,5 +1,9 @@
 package ThreadTest;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 /***
@@ -37,6 +41,7 @@ public class Account {
 	}
 	
 	public static void main(String[] args) {
+		List<String> list = new CopyOnWriteArrayList<String>();
 		Account account = new Account();
 		new Thread(()->account.set("ะกอ๕", 100)).start();
 		

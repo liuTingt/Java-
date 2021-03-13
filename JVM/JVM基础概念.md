@@ -74,9 +74,11 @@ Loading:
 
 Linking的过程分为三小步：
 
-- Verification：校验装进来的class文件是不是符合class文件的标准，假如装进来的不是这个CA FE BA BE，在这个步骤就被拒掉了。
-- Preparation：把class文件静态变量赋默认值，不是赋初始值，比如static i = 8，在这个步骤是先把把i赋值为0.
-- Resolution：是把class文件常量池里面用到的符号引用给转换为直接内存地址，直接可以访问到的内容。
+​	将创建的类合并至Java虚拟机中，使之能够执行的过程。分为以下三个阶段：
+
+- Verification：校验，校验装进来的class文件是不是符合class文件的标准，假如装进来的不是这个CA FE BA BE，在这个步骤就被拒掉了。
+- Preparation：准备，把class文件静态变量初始化默认值，不是赋初始值，比如static i = 8，在这个步骤是先把把i赋值为0.
+- Resolution：解析，是把class文件常量池里面用到的符号引用给转换为直接内存地址，直接可以访问到的内容。
 
 Initializing：把静态变量赋值为初始值。	
 
