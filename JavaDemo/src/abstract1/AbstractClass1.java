@@ -11,7 +11,7 @@ public abstract class AbstractClass1 {
 		String a = count + "aa"+"bb";
 		String b = "1"+ "aa"+"bb";
 		System.out.println(a == b);
-		StringBuffer aBuffer = StringBuffer();
+		StringBuffer aBuffer = new StringBuffer();
 		
 		
 		String build = new StringBuilder().append("aa").append("bb").append("cc").toString();
