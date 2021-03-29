@@ -10,7 +10,7 @@ public class CGTest {
 		enhancer.setSuperclass(CGSubject.class);
 		enhancer.setCallback(new CGMethodInterceptor());
 		CGSubject cgSubject = (CGSubject) enhancer.create();
-		LongAdder
-		cgSubject.hello();
+//		LongAdder
+//		cgSubject.hello();
 	}
 }

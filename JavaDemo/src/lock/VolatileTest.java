@@ -3,16 +3,20 @@ package lock;
 public class VolatileTest {
 
 	public static void main(String[] args) {
-		PrintFlag flag = new PrintFlag();
-		flag.start();
-		for(; ;) {
-			synchronized (flag) {
-				if(flag.isFlag()) {
-					System.out.println("改变了。。");
-				}
-			}
-			
-		}
+		
+		System.out.println(Math.round(-1.45));
+		System.out.println(Math.round(1.5));
+		
+//		PrintFlag flag = new PrintFlag();
+//		flag.start();
+//		for(; ;) {
+//			synchronized (flag) {
+//				if(flag.isFlag()) {
+//					System.out.println("改变了。。");
+//				}
+//			}
+//			
+//		}
 	}
 }
 

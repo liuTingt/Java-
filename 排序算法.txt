@@ -1,0 +1,87 @@
+插入排序 平均时间复杂度O(n2) 最佳时间复杂度O(n) 最差时间复杂度O(n2)
+ * 构建有序序列，对于未排序的，在已排序序列中从后向前扫描，找到相应位置并插入
+ * 1、从第一个元素开始，该元素可以认定已经被排序
+ * 2、取出下一个元素，在已排序的序列中，从后向前扫描
+ * 3、如果该元素（已排序）大于新元素，则移动该元素到下一个位置
+ * 4、重复步骤3，直到找到已排序的元素小于或等于新元素的位置
+ * 5、将新元素插入到该位置
+ * 6、重复步骤2-5
+public static int[] charu(int[] array) {
+        if(array.length == 0) return array;
+        int current;
+        for(int i = 0; i < array.length - 1; i++) {
+            current = array[i+1];
+            int j = i;
+            while (j >=0 && array[j] > current) {
+                array[j+1] = array[j];
+                j--;
+            }
+            array[j+1] = current;
+        }
+        return array;
+    }
+
+
+冒泡排序 平均时间复杂度O(n2) 最佳时间复杂度O(n) 最差时间复杂度O(n2)
+public static int[] maopao(int[] array) {
+        if(array.length == 0) return array;
+        for(int i = 0; i < array.length; i++) {
+            for(int j = 0; j < array.length - 1 - i; j++) {
+                if (array[j] > array[j+1]) {
+                    int temp = array[j];
+                    array[j] = array[j+1];
+                    array[j+1] = temp;
+                }
+            }
+        }
+        return array;
+    }
+
+
+选择排序  平均时间复杂度O(n2) 最佳时间复杂度O(n2) 最差时间复杂度O(n2)
+public int[] xunze(int[] array) {
+	if(array.length == 0) return array;
+	for(int i = 0; i < array.length; i++) {
+			int index = i;
+		for(int j = i + 1; j < array.length; j++) {
+			if (array[index] > array[j]) {
+				index = j;
+			}
+		}
+		int temp = array[index];
+		array[index] = array[i];
+		array[i] = temp;
+	}
+	return array;
+}
+
+希尔排序  平均时间复杂度O(nlog2n) 最佳时间复杂度O(nlog2n) 最差时间复杂度O(nlog2n)
+* 1、选择一个增量序列{n/2,n/2/2,...}
+* 2、按增量序列个数k，对序列进行k趟排序
+* 3、每趟排序，将待排序列分隔成若干长度为m的子序列，分别对各子表进行直接插入排序
+	public static int[] xier(int[] array){
+        if(array.length == 0) return array;
+        int len = array.length;
+        int  grap = len/2;
+        while (grap > 0) {
+            for(int i = grap; i<len; i++){
+                int temp = array[i];
+                int preIndex = i-grap;
+                while (i > 0 && temp < array[preIndex]) {
+                    array[i] = array[preIndex];
+                    array[preIndex] = temp;
+                }
+            }
+            grap = grap/2;
+        }
+        return array;
+    }
+
+快速排序
+
+
+二分法查找
+
+秒杀优化：
+源码优化
+数据库使用数据存储优化
