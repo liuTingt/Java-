@@ -82,6 +82,10 @@ Linking的过程分为三小步：
 
 Initializing：把静态变量赋值为初始值。	
 
+当父类和子类都有静态代码块和构造函数的时候，执行顺序入下：
+父类静态代码块 > 子类静态代码块 >父类构造函数 > 子类构造函数
+ Java虚拟机加载类的时候，就会执行静态代码块，且只执行一次。
+
 ### 类加载器
 
 ![2](D:\WorkSpace\Java\JVM\image\2.jpg)
@@ -94,7 +98,7 @@ Bootstrap：它是加载lib里JDK最核心的内容，比如rt.jar、charset.jar
 
 **第二个类加载器层次**
 
-Extension：这个是Extension加载器罗战雷，加载扩展包里的各种各样的文件，这些扩展包在JDK安装目录jre/lib/ext下的jar
+Extension：这个是Extension加载器扩展类，加载扩展包里的各种各样的文件，这些扩展包在JDK安装目录jre/lib/ext下的jar
 
 **第三个类加载层次**
 
@@ -172,7 +176,7 @@ com.ltt.jvm.classloader.T005_MSBClassLoader
 
 ### 懒加载LazyLoading
 
-- 严格将应该交LazyInitializing
+- 严格应该交LazyInitializing
 - JVM规范并没有规定何时加载
 - 但是严格规定了什么时候初始化
   - new、getStatic（访问实例）、putStatic、invokestatic（访问静态方法），访问final变量除外。

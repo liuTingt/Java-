@@ -264,7 +264,21 @@ Java1.5新增的，在能力上和StringBuffer没有本质区别，但是去掉�
 
 # 五、谈谈Java反射机制，动态代理是基于什么原理？
 
+问题回答：
+
+动态代理是一种方便运行时动态构建代理、动态处理代理方法调用机制。很多场景都是利用类似机制做到的，比如包装RPC调用、AOP
+
+实现动态代理的方式有很多，比如JDK自身提供的动态代理，主要利用了反射机制。还有其他方式比如cglib、ASM等
+
+
+
 ## Java反射机制
+
+反射机制是Java语言的基础功能，是指程序可以访问、检测、修改它本身状态或行为的一种能力。
+
+```
+
+```
 
 
 
@@ -273,6 +287,15 @@ Java1.5新增的，在能力上和StringBuffer没有本质区别，但是去掉�
 
 
 ## 动态代理
+
+动态代理是一种方便运行时动态构建代理、动态处理代理方法调用机制。很多场景都是利用类似机制做到的，比如包装RPC调用、AOP
+
+动态代理实现步骤：
+
+1. 通过实现 InvocationHandler 接口创建自己的调用处理器；
+2. 通过为 Proxy 类指定 ClassLoader 对象和一组 interface 来创建动态代理类；
+3. 通过反射机制获得动态代理类的构造函数，其唯一参数类型是调用处理器接口类型；
+4. 通过构造函数创建动态代理类实例，构造时调用处理器对象作为参数被传入。
 
 
 
@@ -283,3 +306,93 @@ Java1.5新增的，在能力上和StringBuffer没有本质区别，但是去掉�
 
 
 ### CGlib动态代理
+
+
+
+# 七、int 和 Integer 有什么区别？谈谈 Integer 的值缓存范围
+
+Java的8个基础数据类型：byte、short、char、int、long、float、double、boolean。
+
+int的默认值为0；
+
+Integer是int的包装类，它有一个int类型的字段存储数据，并提供了基本操作，比如数学运算、int和字符串之间的抓换，Java5之后提供了自动装箱和自动拆箱功能，Java可以根据上下文自动进行切换，在Java5中新增了静态工厂方法valueOf(),在调用它时会使用一个缓存机制，带来了明显的性能改进，这个默认的缓存范围时-128到127，最大值可以进行配置（JVM提供了参数设置：-XX:AutoBoxCacheMax=N）
+
+自动装箱/拆箱算是一种语法糖，是发生在编译阶段。自动装箱也是使用Integer.valueOf()，所以也会缓存到缓存中。
+
+```
+Integer integer = 1;
+int unboxing = integer ++;
+
+以上代码反编译后
+
+1: invokestatic  #2                  // Method
+java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+8: invokevirtual #3                  // Method
+java/lang/Integer.intValue:()I
+```
+
+这种缓存机制同样存在于其他包装类：
+
+- Boolean：缓存true/false，只会返回两个常量实例Boolean.TRUE/FALSE
+- Short：同样是缓存了-128到127
+- Byte：数值有限，所以全部缓存
+- Character：缓存范围’\u0000’ 到 ‘\u007F’
+
+要避免无意中的装箱、拆箱行为。包装类型占用更多的内存空间，其次在基础类型的值存储在内存中，可以直接读取值，对象查找值，需要先找到对象的内存地址，根据内存地址找对象的值，要产生更多的IO，所以性能比基础类型差。
+
+# 八、对比 Vector、ArrayList、LinkedList 有何区别？
+
+1、底层实现：
+
+ArrayList和Vector内部使用数组实现；LinkedList采用双链表实现
+
+2、读写机制
+
+ArrayList默认容量大小是10，当扩容时要调用底层System.arraycopy()方法进行大量数组复制操作，扩容到原来的1.5倍；删除元素并不会减少数组的容量，（如果需要缩小数组容量，可以调用trimToSize()方法）；查找元素时要遍历数组。
+
+Vector默认容量大小是10，capacityIncrement默认为0，当扩容时，如果capacityIncrement大于0，扩容到现有的size+capacityIncrement，如果capacityIncrement小于0，扩容到现有的2倍。
+
+LinkedList在插入元素是必须要创建一个Entry对象，并更新相应元素的前后元素的引用；查找/删除元素要遍历链表。
+
+3、读写效率
+
+ArrayList对元素的增加和删除会引起数组内存分配空间动态发生变化，因此对其除尾部外的进行插入删除速度比较慢，但检索速度很快。
+
+LinkedList基于链表方式存储数据，增加和删除元素比较快，但检索速度较慢
+
+4、线程安全
+
+ArrayList、LinkedList是非线程安全的；Vector是基于synchronized实现的线程安全。
+
+可以利用Collections这个类为我们提供的synchronizedList(List list)方法返回一个线程安全的同步列表对象。
+
+# 九、对比 Hashtable、HashMap、TreeMap 有什么不同？
+
+![img](https://pic2.zhimg.com/80/26341ef9fe5caf66ba0b7c40bba264a5_720w.png)
+
+
+
+**HashTable**是早期Java类库提供的一个哈希表，线程同步的，不支持null键和值，由于使用同步导致的性能(synchronized锁住方法)，所以很少被推荐使用。并发性不如ConcurrentHashMap，因为ConcurrentHashMap引入了分段锁。
+
+**HashMap**是非线程安全的，支持存储一个null键和多个null值，默认容量值为16，加载因子为0.75。在执行put方法如果++size>容量*加载因子，会触发扩容resize方法，扩容时容量扩大2倍。
+
+Java7之前底层采用数据加链表进行存储，扩容时HashMap采用头插法，HashMap在并发的情况发生扩容时可能会产生循环链表，在执行get的时候，会触发死循环，因为多线程并发进行时，一个线程先完成扩容，将原有链表重新散列到自己的表中，并且链表变成了倒序，后一个线程再扩容时，有进行自己的散列，再次将倒序链表变为正序链表，于是形成了一个环形链表，当get表中不存在的元素时，造成死循环。
+
+Java8底层采用数+链表+红黑树进行存储，当链表数量达到8（默认）时，转换为红黑树，当数量小于6（默认）时，转换为链表结构。
+
+Java8后扩容时采用尾插法，避免了环形链表的形成，但HashMap仍是非线程安全的，在并发情况下可使用ConcurrentHashMap替代。
+
+**LinkedHashMap**时HashMap的子类，保存了记录的插入顺序，在iterator遍历LinkedHashMap时，先得到的记录肯定是先插入的。
+
+**TreeMap**是基于红黑树的一种提供顺序访问的map，和HashMap不同，他的get、put、remove之类操作都是O(log(n))的时间复杂度，具体顺序可以由指定的Comparator来决定，或者根据键的自然顺序来判断。
+
+**ConcurrentHashMap如何实现高效地线程安全？**
+
+- 采用细粒度的synchronized，锁定部分代码，相比HashTable锁住整个方法，占用的cpu更短，效率更高
+
+- 数据存储利用Volatile来保证可见性（Node中，key是final，value声明是volatile的，保证可见性）
+
+- 使用CAS等操作，在特定场景进行无锁并发操作（初始化操作实现在initTable里面）
+
+  
+
