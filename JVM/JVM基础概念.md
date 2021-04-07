@@ -2,7 +2,7 @@
 
 ### Java从编码到执行，Java是解释和编译混合型语言
 
-![1 - 副本](D:\WorkSpace\Java\JVM\image\1 - 副本.jpg)
+![1 - 副本](JVM基础概念.assets/1 - 副本.jpg)
 
 JVM是跨语言的平台，有许多语言可以直接在JVM虚拟机上执行。
 
@@ -28,7 +28,7 @@ azul zing：最新垃圾回收的业界标杆，官网www.azul.com
 
 JDK JRE JVM
 
-![5](D:\WorkSpace\Java\JVM\image\5.jpg)
+![5](JVM基础概念.assets/5.jpg)
 
 ## class文件结构
 
@@ -52,7 +52,7 @@ JDK JRE JVM
 
 - ClassFile构成
 
-  ![9](D:\WorkSpace\Java\JVM\image\9.jpg)
+  ![9](JVM基础概念.assets/9.jpg)
 
 
 
@@ -60,7 +60,7 @@ JDK JRE JVM
 
 ### class文件怎么从硬盘上到内存中，并且开始执行
 
-![1](D:\WorkSpace\Java\JVM\image\1.jpg)
+![1](JVM基础概念.assets/1.jpg)
 
 Class进入内存有三步：
 
@@ -88,7 +88,7 @@ Initializing：把静态变量赋值为初始值。
 
 ### 类加载器
 
-![2](D:\WorkSpace\Java\JVM\image\2.jpg)
+![2](JVM基础概念.assets/2.jpg)
 
 JVM她本身有一个类加载器的层次，这个类加载器本身就是一个普通的class，JVM有一个类加载器的层次分别来加载不同的class，JVM所有的class都是被类加载器加载到内存的，那么这个类加载可以叫做ClassLoader。
 
@@ -110,7 +110,7 @@ CustomerClassLoader：自定义加载器，加载自己定义的加载器。
 
 ### 类加载过程
 
-![image-20210121103333539](C:\Users\lt\AppData\Roaming\Typora\typora-user-images\image-20210121103333539.png)
+![image-20210121103333539](JVM基础概念.assets/image-20210121103333539.png)
 
 ### Class对象到底什么样
 

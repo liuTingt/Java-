@@ -17,7 +17,7 @@ Java类加载过程：Java文件--javac命令 编译器-->class文件---->loadin
 
 # 二、Exception和Error区别？
 
-![img](D:\WorkSpace\Java\极客时间-Java核心技术面试精讲笔记\Java核心技术面试精讲笔记.assets\accba531a365e6ae39614ebfa3273900.png)
+![Throwable](Java核心技术面试精讲笔记.assets/Throwable.png)
 
 Exception和Error都继承Throwable类，在Java中只有Throwable类型的实例才可以被抛出（throw）和捕获（catch），它是异常处理机制的基本组成类型。
 
@@ -174,7 +174,7 @@ PhantomReference phantomReference = new PhantomReference(str, queue);
 
 ## 对象可达性状态流转分析：
 
-![img](https://static001.geekbang.org/resource/image/36/b0/36d3c7b158eda9421ef32463cb4d4fb0.png)
+![img](Java核心技术面试精讲笔记.assets/36d3c7b158eda9421ef32463cb4d4fb0.png)
 
 ### 强可达（Strongly Reachable）：
 
@@ -368,7 +368,7 @@ ArrayList、LinkedList是非线程安全的；Vector是基于synchronized实现�
 
 # 九、对比 Hashtable、HashMap、TreeMap 有什么不同？
 
-![img](https://pic2.zhimg.com/80/26341ef9fe5caf66ba0b7c40bba264a5_720w.png)
+![img](Java核心技术面试精讲笔记.assets/26341ef9fe5caf66ba0b7c40bba264a5_720w.png)
 
 
 

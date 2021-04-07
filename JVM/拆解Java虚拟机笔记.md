@@ -21,7 +21,7 @@
 
 ​	Java虚拟机包含了方法区、堆、Java方法栈、本地方法栈、PC寄存器。
 
-![img](https://static001.geekbang.org/resource/image/ab/77/ab5c3523af08e0bf2f689c1d6033ef77.png)
+![img](拆解Java虚拟机笔记.assets/ab5c3523af08e0bf2f689c1d6033ef77.png)
 
 ​	从硬件视角看，Java字节码无法直接执行。因此Java虚拟机需要把字节码翻译成机器码。
 
@@ -44,7 +44,7 @@
 
 ​	除boolea类型外，Java还有另外7个基本类型，他们拥有不同的值域，但默认值在内存中均为0，这些基本类型中，浮点类型比较特殊，基于他的运算或比较，需要考虑+0.0F、-0.0F以及NaN。
 
-![img](https://static001.geekbang.org/resource/image/77/45/77dfb788a8ad5877e77fc28ed2d51745.png)
+![img](拆解Java虚拟机笔记.assets/77dfb788a8ad5877e77fc28ed2d51745.png)
 
 ​	除long和double外，其他类型及引用类型在解释执行的方法栈帧中占用的大小是一致的，但他们在堆中占用的大小却不同。在将Boolean，byte、char以及shot的值存入字段或者数组单元的时候，Java虚拟机会进行掩码操作（只取最后一位的值存入boolean字段或数组中）。在读取时，Java虚拟机会将其扩展为int类型。
 
