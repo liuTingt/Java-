@@ -338,7 +338,7 @@ java/lang/Integer.intValue:()I
 - Byte：数值有限，所以全部缓存
 - Character：缓存范围’\u0000’ 到 ‘\u007F’
 
-要避免无意中的装箱、拆箱行为。包装类型占用更多的内存空间，其次在基础类型的值存储在内存中，可以直接读取值，对象查找值，需要先找到对象的内存地址，根据内存地址找对象的值，要产生更多的IO，所以性能比基础类型差。
+要避免无意中的装箱、拆箱行为。包装类型占用更多的内存空间，其次基础类型的值存储在内存中，可以直接读取值，对象查找值，需要先找到对象的内存地址，根据内存地址找对象的值，要产生更多的IO操作，所以性能比基础类型差。
 
 # 八、对比 Vector、ArrayList、LinkedList 有何区别？
 
@@ -352,7 +352,7 @@ ArrayList默认容量大小是10，当扩容时要调用底层System.arraycopy()
 
 Vector默认容量大小是10，capacityIncrement默认为0，当扩容时，如果capacityIncrement大于0，扩容到现有的size+capacityIncrement，如果capacityIncrement小于0，扩容到现有的2倍。
 
-LinkedList在插入元素是必须要创建一个Entry对象，并更新相应元素的前后元素的引用；查找/删除元素要遍历链表。
+LinkedList在插入元素时必须要创建一个Entry对象，并更新相应元素的前后元素的引用；查找/删除元素要遍历链表。
 
 3、读写效率
 
