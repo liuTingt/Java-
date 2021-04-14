@@ -29,7 +29,7 @@ public class SynTest implements Runnable{
 		SynTest test = new SynTest();
 		Thread t1 = new Thread(test, "t1");
 		Thread t2 = new Thread(test, "t2");
-		t1.start();
+		t1.run();
 		t2.start();
 	}
 
