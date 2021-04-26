@@ -290,6 +290,8 @@ HotSpot给出的解决方案是一项叫做卡表的技术，该技术将整个�
 
 
 
+### Parallel收集器
+
 
 
 ### Parallel Old收集器
