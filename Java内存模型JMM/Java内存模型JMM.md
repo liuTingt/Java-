@@ -197,3 +197,7 @@ public class VolatileSerialTest {
 
 ```
 
+
+
+参考资料：
+https://mp.weixin.qq.com/s/J3_ZuEU35Q73CfMcsTIZXg
